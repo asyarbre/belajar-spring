@@ -1,0 +1,8 @@
+package com.asyarbre.firstspringboot.dto;
+
+import lombok.Data;
+
+@Data
+public class HelloMessageResponseDto {
+    private String message;
+}

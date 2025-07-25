@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: demo-app
+  datasource:
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+    url: jdbc:postgresql://localhost:5432/bookcatalog
+    username: postgres
+    password: rahasia123
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+app:
+  welcome-text: Hello, Dev!
