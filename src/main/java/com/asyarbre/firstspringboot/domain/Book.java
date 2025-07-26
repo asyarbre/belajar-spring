@@ -2,13 +2,17 @@ package com.asyarbre.firstspringboot.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "book")
-public class Book {
+@Table(name = "book", indexes = {
+        @Index(name = "idx_book_secure_id", columnList = "secure_id")
+})
+public class Book extends AbstractBaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
