@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,9 +16,10 @@ import org.hibernate.annotations.SQLRestriction;
 @Table(name = "author")
 @SQLRestriction("deleted = false")
 @SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")
-public class Author {
+public class Author implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_generator")
+    @SequenceGenerator(name = "author_generator", sequenceName = "author_id_seq")
     private Long id;
 
     @Column(name = "name", nullable = false)
