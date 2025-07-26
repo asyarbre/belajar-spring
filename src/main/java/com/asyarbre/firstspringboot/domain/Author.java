@@ -8,12 +8,15 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "author")
+@Table(name = "author", indexes = {
+        @Index(name = "uk_secure", columnList = "secure_id")
+})
 @SQLRestriction("deleted = false")
 @SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")
 public class Author implements Serializable {
@@ -21,6 +24,9 @@ public class Author implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_generator")
     @SequenceGenerator(name = "author_generator", sequenceName = "author_id_seq")
     private Long id;
+
+    @Column(name = "secure_id", nullable = false, unique = true)
+    private String secureId = UUID.randomUUID().toString();
 
     @Column(name = "name", nullable = false)
     private String name;
