@@ -61,4 +61,15 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return categories;
     }
+
+    @Override
+    public List<CategoryListResponseDto> constructCategoryListResponseDto(List<Category> categories) {
+        return categories.stream().map(category -> {
+            CategoryListResponseDto responseDto = new CategoryListResponseDto();
+            responseDto.setCode(category.getCode());
+            responseDto.setName(category.getName());
+            responseDto.setDescription(category.getDescription());
+            return responseDto;
+        }).collect(Collectors.toList());
+    }
 }

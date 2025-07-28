@@ -1,10 +1,7 @@
 package com.asyarbre.firstspringboot.service;
 
 import com.asyarbre.firstspringboot.domain.Publisher;
-import com.asyarbre.firstspringboot.dto.PublisherCreateRequestDto;
-import com.asyarbre.firstspringboot.dto.PublisherListResponseDto;
-import com.asyarbre.firstspringboot.dto.PublisherUpdateRequestDto;
-import com.asyarbre.firstspringboot.dto.ResultPageResponseDto;
+import com.asyarbre.firstspringboot.dto.*;
 
 public interface PublisherService {
     void createPublisher(PublisherCreateRequestDto publisherCreateRequestDto);
@@ -20,4 +17,6 @@ public interface PublisherService {
             String direction,
             String publisherName
     );
+
+    PublisherResponseDto constructPublisherResponseDto(Publisher publisher);
 }

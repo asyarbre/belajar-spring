@@ -64,4 +64,14 @@ public class AuthorServiceImpl implements AuthorService {
             throw new BadRequestException("Authors not found for the given IDs" + authorIdList);
         return authors;
     }
+
+    @Override
+    public List<AuthorResponseDto> constructAuthorResponseDto(List<Author> authors) {
+        return authors.stream().map(author -> {
+            AuthorResponseDto authorResponseDto = new AuthorResponseDto();
+            authorResponseDto.setName(author.getName());
+            authorResponseDto.setDescription(author.getDescription());
+            return authorResponseDto;
+        }).collect(Collectors.toList());
+    }
 }

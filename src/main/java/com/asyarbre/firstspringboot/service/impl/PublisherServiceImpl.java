@@ -1,10 +1,7 @@
 package com.asyarbre.firstspringboot.service.impl;
 
 import com.asyarbre.firstspringboot.domain.Publisher;
-import com.asyarbre.firstspringboot.dto.PublisherCreateRequestDto;
-import com.asyarbre.firstspringboot.dto.PublisherListResponseDto;
-import com.asyarbre.firstspringboot.dto.PublisherUpdateRequestDto;
-import com.asyarbre.firstspringboot.dto.ResultPageResponseDto;
+import com.asyarbre.firstspringboot.dto.*;
 import com.asyarbre.firstspringboot.exception.BadRequestException;
 import com.asyarbre.firstspringboot.repository.PublisherRepository;
 import com.asyarbre.firstspringboot.service.PublisherService;
@@ -74,5 +71,13 @@ public class PublisherServiceImpl implements PublisherService {
                 pageResult.getTotalElements(),
                 pageResult.getTotalPages()
         );
+    }
+
+    @Override
+    public PublisherResponseDto constructPublisherResponseDto(Publisher publisher) {
+        PublisherResponseDto publisherResponseDto = new PublisherResponseDto();
+        publisherResponseDto.setPublisherId(publisher.getSecureId());
+        publisherResponseDto.setPublisherName(publisher.getName());
+        return publisherResponseDto;
     }
 }

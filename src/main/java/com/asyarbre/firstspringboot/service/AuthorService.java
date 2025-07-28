@@ -17,4 +17,6 @@ public interface AuthorService {
     void deleteAuthor(String id);
 
     List<Author> findAuthors(List<String> authorIdList);
+
+    List<AuthorResponseDto> constructAuthorResponseDto(List<Author> authors);
 }
