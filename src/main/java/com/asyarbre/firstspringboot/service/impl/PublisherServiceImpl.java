@@ -51,6 +51,11 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
+    public Publisher findPublisher(String publisherId) {
+        return publisherRepository.findBySecureId(publisherId).orElseThrow(() -> new BadRequestException("Publisher not found"));
+    }
+
+    @Override
     public ResultPageResponseDto<PublisherListResponseDto> findPublisherList(Integer pages, Integer limit, String sortBy, String direction, String publisherName) {
         publisherName = publisherName == null ? "%" : "%" + publisherName + "%";
         Sort sort = Sort.by(new Sort.Order(PaginationUtil.getSortBy(direction), sortBy));

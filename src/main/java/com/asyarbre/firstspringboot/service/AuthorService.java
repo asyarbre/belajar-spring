@@ -1,5 +1,6 @@
 package com.asyarbre.firstspringboot.service;
 
+import com.asyarbre.firstspringboot.domain.Author;
 import com.asyarbre.firstspringboot.dto.AuthorCreateRequestDto;
 import com.asyarbre.firstspringboot.dto.AuthorResponseDto;
 import com.asyarbre.firstspringboot.dto.AuthorUpdateRequestDto;
@@ -14,4 +15,6 @@ public interface AuthorService {
     void updateAuthor(String id, AuthorUpdateRequestDto authorUpdateRequestDto);
 
     void deleteAuthor(String id);
+
+    List<Author> findAuthors(List<String> authorIdList);
 }

@@ -16,24 +16,24 @@ import java.util.List;
 public class AuthorResource {
     private final AuthorService authorService;
 
-    @GetMapping("/author/{id}/detail")
+    @GetMapping("/v1/author/{id}/detail")
     public ResponseEntity<AuthorResponseDto> findAuthorById(@PathVariable String id) {
         return ResponseEntity.ok().body(authorService.findAuthorById(id));
     }
 
-    @PostMapping("/author")
+    @PostMapping("/v1/author")
     public ResponseEntity<Void> createNewAuthor(@RequestBody List<AuthorCreateRequestDto> authorCreateRequestDto) {
         authorService.createNewAuthor(authorCreateRequestDto);
         return ResponseEntity.created(URI.create("/author")).build();
     }
 
-    @PutMapping("/author/{id}")
+    @PutMapping("/v1/author/{id}")
     public ResponseEntity<Void> updateAuthor(@PathVariable String id, @RequestBody AuthorUpdateRequestDto authorUpdateRequestDto) {
         authorService.updateAuthor(id, authorUpdateRequestDto);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/author/{id}")
+    @DeleteMapping("/v1/author/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable String id) {
         authorService.deleteAuthor(id);
         return ResponseEntity.noContent().build();

@@ -52,4 +52,13 @@ public class CategoryServiceImpl implements CategoryService {
         return PaginationUtil.createResultPageDto(categoryListResponses, pageResult.getTotalElements(), pageResult.getTotalPages());
 
     }
+
+    @Override
+    public List<Category> findCategories(List<String> categoryCodeList) {
+        List<Category> categories = categoryRepository.findByCodeIn(categoryCodeList);
+        if (categories.isEmpty()) {
+            throw new IllegalArgumentException("No categories found for the provided codes");
+        }
+        return categories;
+    }
 }
