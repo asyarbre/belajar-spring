@@ -61,7 +61,7 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> findAuthors(List<String> authorIdList) {
         List<Author> authors = authorRepository.findBySecureIdIn(authorIdList);
         if (authors.isEmpty())
-            throw new BadRequestException("author cant empty");
+            throw new BadRequestException("Authors not found for the given IDs" + authorIdList);
         return authors;
     }
 }
