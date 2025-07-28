@@ -19,8 +19,8 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
 
     @Override
-    public AuthorResponseDto findAuthorById(Long id) {
-        Author author = authorRepository.findAuthorById(id).orElseThrow(() -> new BadRequestException("Author not found"));
+    public AuthorResponseDto findAuthorById(String id) {
+        Author author = authorRepository.findAuthorBySecureId(id).orElseThrow(() -> new BadRequestException("Author not found"));
         AuthorResponseDto authorResponseDto = new AuthorResponseDto();
         authorResponseDto.setName(author.getName());
         authorResponseDto.setDescription(author.getDescription());
@@ -40,8 +40,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void updateAuthor(Long id, AuthorUpdateRequestDto authorUpdateRequestDto) {
-        Author author = authorRepository.findAuthorById(id).orElseThrow(() -> new BadRequestException("Author not found"));
+    public void updateAuthor(String id, AuthorUpdateRequestDto authorUpdateRequestDto) {
+        Author author = authorRepository.findAuthorBySecureId(id).orElseThrow(() -> new BadRequestException("Author not found"));
         if (authorUpdateRequestDto.getName() != null) {
             author.setName(authorUpdateRequestDto.getName());
         }
@@ -52,11 +52,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void deleteAuthor(Long id) {
-// Author author = authorRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new BadRequestException("Author not found"));
-// author.setDeleted(true);
-// authorRepository.save(author);
-        Author author = authorRepository.findAuthorById(id).orElseThrow(() -> new BadRequestException("Author not found"));
+    public void deleteAuthor(String id) {
+        Author author = authorRepository.findAuthorBySecureId(id).orElseThrow(() -> new BadRequestException("Author not found"));
         authorRepository.delete(author);
     }
 }
