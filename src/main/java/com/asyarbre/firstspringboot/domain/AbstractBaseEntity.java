@@ -13,6 +13,6 @@ public abstract class AbstractBaseEntity implements Serializable {
     @Column(name = "secure_id", nullable = false, unique = true)
     private String secureId = UUID.randomUUID().toString();
 
-    @Column(name = "deleted", columnDefinition = "boolean default false")
-    private Boolean deleted;
+    @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
+    private boolean deleted = false;
 }
