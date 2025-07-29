@@ -5,6 +5,7 @@ import com.asyarbre.firstspringboot.dto.BookDetailResponseDto;
 import com.asyarbre.firstspringboot.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -20,6 +21,7 @@ public class BookResource {
         return ResponseEntity.created(URI.create("/v1/book")).build();
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/v1/book/{bookId}")
     public ResponseEntity<BookDetailResponseDto> findBookDetail(@PathVariable("bookId") String bookId) {
         BookDetailResponseDto bookDetailResponseDto = bookService.findBookDetailById(bookId);

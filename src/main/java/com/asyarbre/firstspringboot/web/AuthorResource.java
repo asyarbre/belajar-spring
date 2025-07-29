@@ -6,6 +6,7 @@ import com.asyarbre.firstspringboot.dto.AuthorUpdateRequestDto;
 import com.asyarbre.firstspringboot.service.AuthorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -16,23 +17,27 @@ import java.util.List;
 public class AuthorResource {
     private final AuthorService authorService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/v1/author/{id}/detail")
     public ResponseEntity<AuthorResponseDto> findAuthorById(@PathVariable String id) {
         return ResponseEntity.ok().body(authorService.findAuthorById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/v1/author")
     public ResponseEntity<Void> createNewAuthor(@RequestBody List<AuthorCreateRequestDto> authorCreateRequestDto) {
         authorService.createNewAuthor(authorCreateRequestDto);
         return ResponseEntity.created(URI.create("/author")).build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/v1/author/{id}")
     public ResponseEntity<Void> updateAuthor(@PathVariable String id, @RequestBody AuthorUpdateRequestDto authorUpdateRequestDto) {
         authorService.updateAuthor(id, authorUpdateRequestDto);
         return ResponseEntity.ok().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/v1/author/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable String id) {
         authorService.deleteAuthor(id);
